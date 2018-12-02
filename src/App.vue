@@ -7,6 +7,9 @@
           <hello/>
           <loop/>
       </main>
+      <section>
+        <clickme/>
+      </section>
         </div>
     </div>
   </div>
@@ -16,13 +19,17 @@
 import Navbar from './components/Navbar.vue';
 import Hello from './components/Hello.vue';
 import Loop from './components/Loop.vue';
+import Clickme from './components/Clickme.vue';
+import Testdata from './data/Testdata.vue';
 
 export default {
   name: 'app',
   components: {
     Navbar,
     Hello,
-    Loop
+    Loop,
+    Clickme,
+    Testdata
   }
 }
 </script>
