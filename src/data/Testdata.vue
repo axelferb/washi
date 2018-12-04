@@ -1,7 +1,21 @@
+<template>
+  <div>
+    <button v-on:click="changeText">
+      {{users[0].username}}
+    </button>
+  </div>
+</template>
+
 <script>
   export default {
+    methods: {
+      changeText: function(event) {
+        this.users[0].username = 'kuken'
+      }
+    },
     name: "testData",
     data() {
+      // console.log(this)
       return {
         users: [
           {

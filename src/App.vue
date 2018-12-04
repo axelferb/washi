@@ -8,7 +8,7 @@
           <loop/>
       </main>
       <section>
-        <clickme/>
+        <testdata/>
       </section>
         </div>
     </div>
