@@ -3,7 +3,7 @@
     <navbar/>
     <main class="Page-main">
       <div class="Page-container">
-        <!-- <router-view></router-view> -->
+        <router-view></router-view>
       </div>
       <props/>
     </main>
@@ -16,7 +16,6 @@
 import Navbar from './components/Navbar.vue';
 import WFooter from './components/WFooter.vue';
 import Props from './props/props.vue';
-console.log(Props.props)
 export default {
   name: 'app',
   components: {
