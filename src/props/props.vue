@@ -1,33 +1,34 @@
 <template>
-  <div style="display:flex; justify-content:center; align-items:center; margin:15px; auto;">
-    <div
-      class="Loopers"
-      v-for="n in 5"
-      :key="n"
-      style="display:flex; justify-content:center; align-items:center; height:100px; width:100px; background-color:grey; box-sizing:border-box; border:1px solid white;"
-    >
-      <p>{{this.$props}}</p>
-    </div>
+  <div style="display:flex; flex-wrap:wrap; align-items:center; margin:5px;">
+    <bookingBox v-for="day in 7" :key="day" :id="'dag'+day"></bookingBox>
   </div>
 </template>
 
 <script>
+import bookingBox from "./bookingbox.vue";
 export default {
-  props: {
-    booked: Boolean,
-    appNo: Number
-  },
-  data() {
-    return {};
-  },
-  methods: {
-    book: function(event) {}
-  },
+  name: "Bookings",
   created: function() {
-    console.log("Kuken");
-    console.log(this);
-    console.log(this.$props);
-    console.log(this.$props.booked);
+    // console.log(this.$children[0].booked);
+    // console.log("Before");
+    // for (let i = 0; i < this.$children.length; i++) {
+    //   console.log(this.$children[i]);
+    // }
+    // console.log("After");
+    // console.log(this.$children);
+    // if (this.appNo !== myAppNo) {
+    //   // this.$el.className = "booked";
+    //   console.log(this.className);
+    // } else if (this.appNo === myAppNo) {
+    //   // this.$el.className = "bookedByMe";
+    //   console.log(this.className);
+    // } else {
+    //   // this.$el.className = "free";
+    //   console.log(this.className);
+    // }
+  },
+  components: {
+    bookingBox
   }
 };
 </script>

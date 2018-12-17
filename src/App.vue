@@ -5,28 +5,27 @@
       <div class="Page-container">
         <router-view></router-view>
       </div>
-      <props/>
+      <Bookings/>
     </main>
     <w-footer/>
   </div>
 </template>
 
 <script>
-// console.log(props.data)
-import Navbar from './components/Navbar.vue';
-import WFooter from './components/WFooter.vue';
-import Props from './props/props.vue';
+import Navbar from "./components/Navbar.vue";
+import WFooter from "./components/WFooter.vue";
+import Bookings from "./props/props.vue";
 export default {
-  name: 'app',
+  name: "app",
   components: {
     Navbar,
     WFooter,
-    Props
+    Bookings
   }
-}
+};
 </script>
 
 <style lang="less">
-  @import 'src/Assets/Styles/app.less';
+@import "src/Assets/Styles/app.less";
 </style>
 
