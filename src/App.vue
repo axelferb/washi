@@ -51,8 +51,7 @@
         </div>
       </div>
     </header>
-    <div 
-    class="Page-container">
+    <div class="Page-container">
       <main class="Page-main">
         <router-view @authenticated="setAuthenticated"/>
       </main>
@@ -72,8 +71,8 @@ export default {
     return {
       authenticated: false,
       mockAccount: {
-        username: "1203",
-        password: "123"
+        username: "1",
+        password: "1"
       },
       isActive: false
     };
