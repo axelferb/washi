@@ -54,7 +54,7 @@
                 year === today.format('YYYY')
             }"
             class="Calendar-day"
-            title="Available"
+            value="0"
           >
             <div class="Calendar-day-content">
               <div class="Calendar-dayNumber">{{date}}</div>
@@ -81,6 +81,7 @@
           <button
             v-if="selectedDate !== '' && selectedTime !== ''"
             @click="saveUser"
+            id="Book-button"
             class="Button u-marginTlg"
           >Boka tid</button>
           <button
@@ -129,6 +130,7 @@ export default {
   computed: {
     year: function() {
       return this.dateContext.format("Y");
+      console.log("Year");
     },
     month: function() {
       return this.dateContext.format("MMMM");
@@ -163,24 +165,55 @@ export default {
     this.getAllUsers();
     this.checkIfFull();
   },
+  beforeUpdate() {
+    this.getAllUsers();
+    this.beforeUpdating();
+  },
+  updated: function() {
+    this.getAllUsers();
+    console.log("Updated");
+    this.checkIfFull();
+  },
   methods: {
-    checkIfFull: function(date) {
-      var bookingCounter = 0;
-      var calendarDays = document.getElementsByClassName("Calendar-day");
-      console.log("------");
-      console.log("Ran");
-      for (const calendarDay of calendarDays) {
+    beforeUpdating: function() {
+      var bookeddays = document.getElementsByClassName("Calendar-day redDiv");
+      for (const bookedday of bookeddays) {
         for (let i = 0; i < app.bookings.length; i++) {
-          if (app.bookings[i].bookingDate === calendarDay.id) {
-            bookingCounter++;
-            if (bookingCounter >= 5) {
-              var colorThisDiv = document.getElementById(calendarDay.id);
-              colorThisDiv.className = "Calendar-day Calendar-day--before";
-              colorThisDiv.title = "Unavailable";
-              console.log("------");
-              console.log("Ran and found full date(s)");
-              console.log(calendarDay.id);
-              console.log("------");
+          if (app.bookings[i].bookingDate === bookedday.id) {
+            if (bookedday.value == 5) {
+              bookedday.className = "Calendar-day";
+            }
+          }
+        }
+      }
+    },
+    checkIfFull: function() {
+      // var calendarDays = document.getElementsByClassName("Calendar-day");
+      // for (const calendarDay of calendarDays) {
+      //   for (let i = 0; i < app.bookings.length; i++) {
+      //     if (app.bookings[i].bookingDate === calendarDay.id) {
+      //       if (bookingCounter >= 5) {
+      //         var colorThisDiv = document.getElementById(calendarDay.id);
+      //         colorThisDiv.data++;
+      //         colorThisDiv.className = "Calendar-day Calendar-day--before";
+      //         colorThisDiv.title = "Unavailable";
+      //       }
+      //     }
+      //   }
+      // }
+      var freedays = document.getElementsByClassName("Calendar-day");
+      for (const freeday of freedays) {
+        for (let i = 0; i < app.bookings.length; i++) {
+          // console.log(app.bookings[i]);
+          if (freeday.id === app.bookings[i].bookingDate) {
+            freeday.value++;
+            if (freeday.value == 5) {
+              // console.log("Make red");
+              freeday.className = "Calendar-day redDiv";
+            } else if (freeday.value > 5) {
+              freeday.value = 5;
+            } else {
+              // console.log("Do not make red");
             }
           }
         }
@@ -188,11 +221,11 @@ export default {
     },
     addMonth: function() {
       this.dateContext = moment(this.dateContext).add(1, "month");
-      console.log("knapp fram");
+      this.checkIfFull();
     },
     subtractMonth: function() {
       this.dateContext = moment(this.dateContext).subtract(1, "month");
-      console.log("knapp bak");
+      this.checkIfFull();
     },
 
     setDateId: function(date) {
@@ -211,7 +244,6 @@ export default {
       this.displayDate = moment(year + month + date).format(
         "dddd" + " D " + "MMMM"
       );
-      console.log(this.selectedDate);
     },
     selectTime: function(time) {
       this.selectedTime = "tid" + time;
@@ -219,7 +251,6 @@ export default {
         selectedDate: this.selectedDate,
         selectedTime: "tid" + time
       };
-      console.log(this.selectedTime);
     },
     getAllUsers: function() {
       axios
