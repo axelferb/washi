@@ -51,10 +51,10 @@
         </div>
       </div>
     </header>
-    <div 
-    class="Page-container">
+    <div class="Page-container">
       <main class="Page-main">
-        <router-view @authenticated="setAuthenticated"/>
+        <!-- <router-view @authenticated="setAuthenticated"/> -->
+        <bookings></bookings>
       </main>
     </div>
     <w-footer v-if="authenticated"/>
@@ -63,10 +63,12 @@
 
 <script>
 import WFooter from "./User/components/Footer.vue";
+import bookings from "./User/test/bookings.vue";
 export default {
   name: "App",
   components: {
-    WFooter
+    WFooter,
+    bookings
   },
   data() {
     return {
